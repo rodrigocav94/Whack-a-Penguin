@@ -8,6 +8,8 @@
 import SpriteKit
 
 class WhackSlot: SKNode {
+    var charNode: SKSpriteNode!
+    
     func configure(at position: CGPoint) { // Creating a config func instead of init in order to avoid having multiple inits to satisfy required init.
         
         // Add a hole at its current position
@@ -15,5 +17,19 @@ class WhackSlot: SKNode {
         
         let sprite = SKSpriteNode(imageNamed: "whackHole")
         addChild(sprite)
+        
+        let cropNode = SKCropNode()
+        cropNode.position = CGPoint(x: 0, y: 15) // puts it slightly above the whackHole, just enough to line up the mask.
+        cropNode.zPosition = 1 // put it to the front of other nodes
+        cropNode.maskNode = SKSpriteNode(imageNamed: "whackMask")
+        
+        
+        charNode = SKSpriteNode(imageNamed: "penguinGood")
+        charNode.position = CGPoint(x: 0, y: -90) // putting character node below the whack hole. Y is character's height + 10.
+        charNode.name = "character"
+        
+        cropNode.addChild(charNode) // crop node only crops nodes that are inside it. So we need to have a clear hierarchy: the slot has the hole and crop node as children, and the crop node has the character node as a child.
+        
+        addChild(cropNode)
     }
 }
