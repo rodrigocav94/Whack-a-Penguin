@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9F06B9D42C07CAAF0060D210 /* WhackSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F06B9D32C07CAAF0060D210 /* WhackSlot.swift */; };
+		9F1EC15C2C090E9E00397B39 /* gameOver.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9F1EC15B2C090E9E00397B39 /* gameOver.caf */; };
 		9FB35BC52C050F8C0059D00A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB35BC42C050F8C0059D00A /* AppDelegate.swift */; };
 		9FB35BC72C050F8C0059D00A /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9FB35BC62C050F8C0059D00A /* GameScene.sks */; };
 		9FB35BCB2C050F8C0059D00A /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB35BCA2C050F8C0059D00A /* GameScene.swift */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		9F06B9D32C07CAAF0060D210 /* WhackSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhackSlot.swift; sourceTree = "<group>"; };
+		9F1EC15B2C090E9E00397B39 /* gameOver.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = gameOver.caf; sourceTree = "<group>"; };
 		9FB35BC12C050F8C0059D00A /* Whack-a-Penguin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Whack-a-Penguin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FB35BC42C050F8C0059D00A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9FB35BC62C050F8C0059D00A /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 		9FB35BDB2C0520180059D00A /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				9F1EC15B2C090E9E00397B39 /* gameOver.caf */,
 				9FB35BDC2C05202A0059D00A /* whack.caf */,
 				9FB35BDD2C05202A0059D00A /* whackBad.caf */,
 			);
@@ -143,6 +146,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F1EC15C2C090E9E00397B39 /* gameOver.caf in Resources */,
 				9FB35BC72C050F8C0059D00A /* GameScene.sks in Resources */,
 				9FB35BDE2C05202A0059D00A /* whack.caf in Resources */,
 				9FB35BD02C050F8D0059D00A /* Base in Resources */,
