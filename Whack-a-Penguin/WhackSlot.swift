@@ -22,13 +22,13 @@ class WhackSlot: SKNode {
         addChild(sprite)
         
         let cropNode = SKCropNode()
-        cropNode.position = CGPoint(x: 0, y: 15) // puts it slightly above the whackHole, just enough to line up the mask.
+        cropNode.position = CGPoint(x: 0, y: 16.5) // puts it slightly above the whackHole, just enough to line up the mask.
         cropNode.zPosition = 1 // put it to the front of other nodes
         cropNode.maskNode = SKSpriteNode(imageNamed: "whackMask")
         
         
-        charNode = SKSpriteNode(imageNamed: "penguinGood")
-        charNode.position = CGPoint(x: 0, y: -90) // putting character node below the whack hole. Y is character's height + 10.
+        charNode = SKSpriteNode(imageNamed: "good1")
+        charNode.position = CGPoint(x: 0, y: -120) // putting character node below the whack hole. Y is character's height + 10.
         charNode.name = "character"
         
         cropNode.addChild(charNode) // crop node only crops nodes that are inside it. So we need to have a clear hierarchy: the slot has the hole and crop node as children, and the crop node has the character node as a child.
@@ -39,15 +39,15 @@ class WhackSlot: SKNode {
     func show(hideTime: Double) {
         if isVisible { return }
         
-        charNode.run(SKAction.moveBy(x: 0, y: 80, duration: 0.05))
+        charNode.run(SKAction.moveBy(x: 0, y: 115, duration: 0.05))
         isVisible = true
         isHit = false
         
         if Int.random(in: 0...2) == 0 {
-            charNode.texture = SKTexture(imageNamed: "penguinGood")
+            charNode.texture = SKTexture(imageNamed: "good\(Int.random(in: 1...5))")
             charNode.name = "charFriend"
         } else {
-            charNode.texture = SKTexture(imageNamed: "penguinEvil")
+            charNode.texture = SKTexture(imageNamed: "bad\(Int.random(in: 1...5))")
             charNode.name = "charEnemy"
         }
         
@@ -59,7 +59,7 @@ class WhackSlot: SKNode {
     func hide() {
         if !isVisible { return }
         
-        charNode.run(SKAction.moveBy(x: 0, y: -80, duration: 0.05))
+        charNode.run(SKAction.moveBy(x: 0, y: -115, duration: 0.05))
         isVisible = false
     }
 }
