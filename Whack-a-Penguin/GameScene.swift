@@ -17,6 +17,7 @@ class GameScene: SKScene {
         }
     }
     var numRounds = 0
+    var gameOver: SKSpriteNode!
     
     override func didMove(to view: SKView) {
         let background = SKSpriteNode(imageNamed: "whackBackground")
@@ -55,6 +56,10 @@ class GameScene: SKScene {
         let location = touch.location(in: self)
         let tappedNodes = nodes(at: location)
         
+        if numRounds >= 30  {
+            restartGame()
+            return
+        }
         
         for node in tappedNodes {
             guard let whackSlot = node.parent?.parent as? WhackSlot else { return }
@@ -93,11 +98,14 @@ class GameScene: SKScene {
                 slot.hide()
             }
             
-            let gameOver = SKSpriteNode(imageNamed: "gameOver")
+            gameOver = SKSpriteNode(imageNamed: "gameOver")
             gameOver.position = CGPoint(x: 590, y: 410)
             gameOver.zPosition = 1
             addChild(gameOver)
             run(SKAction.playSoundFileNamed("gameOver.caf", waitForCompletion: false))
+            
+            gameScore.run(SKAction.move(to: CGPoint(x: 450, y: 310), duration: 0.15))
+            gameScore.zPosition = 1
             
             return
         }
@@ -117,6 +125,18 @@ class GameScene: SKScene {
         let delay = Double.random(in: minDelay...maxDelay)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
+            self?.createEnemy()
+        }
+    }
+    
+    func restartGame() {
+        gameScore.run(SKAction.move(to: CGPoint(x: 8, y: 8), duration: 0.15))
+        gameOver.removeFromParent()
+        numRounds = 0
+        score = 0
+        popupTime = 0.85
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
             self?.createEnemy()
         }
     }
