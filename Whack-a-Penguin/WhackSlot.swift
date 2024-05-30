@@ -8,6 +8,9 @@
 import SpriteKit
 
 class WhackSlot: SKNode {
+    var isVisible = false
+    var isHit = false
+    
     var charNode: SKSpriteNode!
     
     func configure(at position: CGPoint) { // Creating a config func instead of init in order to avoid having multiple inits to satisfy required init.
@@ -31,5 +34,32 @@ class WhackSlot: SKNode {
         cropNode.addChild(charNode) // crop node only crops nodes that are inside it. So we need to have a clear hierarchy: the slot has the hole and crop node as children, and the crop node has the character node as a child.
         
         addChild(cropNode)
+    }
+    
+    func show(hideTime: Double) {
+        if isVisible { return }
+        
+        charNode.run(SKAction.moveBy(x: 0, y: 80, duration: 0.05))
+        isVisible = true
+        isHit = false
+        
+        if Int.random(in: 0...2) == 0 {
+            charNode.texture = SKTexture(imageNamed: "penguinGood")
+            charNode.name = "charFriend"
+        } else {
+            charNode.texture = SKTexture(imageNamed: "penguinEvil")
+            charNode.name = "charEnemy"
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + (hideTime * 3)) { [weak self] in
+            self?.hide()
+        }
+    }
+    
+    func hide() {
+        if !isVisible { return }
+        
+        charNode.run(SKAction.moveBy(x: 0, y: -80, duration: 0.05))
+        isVisible = false
     }
 }
