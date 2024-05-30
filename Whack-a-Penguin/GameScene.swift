@@ -16,6 +16,7 @@ class GameScene: SKScene {
             gameScore.text = "Score \(score)"
         }
     }
+    var numRounds = 0
     
     override func didMove(to view: SKView) {
         let background = SKSpriteNode(imageNamed: "whackBackground")
@@ -85,6 +86,20 @@ class GameScene: SKScene {
     }
     
     func createEnemy() {
+        numRounds += 1
+        
+        if numRounds >= 30 {
+            for slot in slots {
+                slot.hide()
+            }
+            
+            let gameOver = SKSpriteNode(imageNamed: "gameOver")
+            gameOver.position = CGPoint(x: 590, y: 410)
+            gameOver.zPosition = 1
+            addChild(gameOver)
+            
+            return
+        }
         popupTime *= 0.991
         
         slots.shuffle()
