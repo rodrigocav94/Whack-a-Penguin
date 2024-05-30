@@ -48,10 +48,10 @@ class WhackSlot: SKNode {
         isHit = false
         
         if Int.random(in: 0...2) == 0 {
-            charNode.texture = SKTexture(imageNamed: "good")
+            charNode.texture = SKTexture(imageNamed: "good\(Int.random(in: 1...11))")
             charNode.name = "charFriend"
         } else {
-            charNode.texture = SKTexture(imageNamed: "bad\(Int.random(in: 1...11))")
+            charNode.texture = SKTexture(imageNamed: "bad")
             charNode.name = "charEnemy"
         }
         
