@@ -41,6 +41,17 @@ class WhackSlot: SKNode {
     func show(hideTime: Double) {
         if isVisible { return }
         
+        if let mudParticles = SKEmitterNode(fileNamed: "MudParticles") {
+            mudParticles.position = CGPoint(x: 0, y: 0)
+            addChild(mudParticles)
+            
+            let delay = SKAction.wait(forDuration: 0.25)
+            let removeParticle = SKAction.run { [weak mudParticles] in
+                mudParticles?.removeFromParent()
+            }
+            mudParticles.run(SKAction.sequence([delay, removeParticle]))
+        }
+        
         charNode.xScale = 1
         charNode.yScale = 1
         charNode.run(SKAction.moveBy(x: 0, y: characterSize, duration: 0.05))
