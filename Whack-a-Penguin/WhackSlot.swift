@@ -29,7 +29,7 @@ class WhackSlot: SKNode {
         
         
         charNode = SKSpriteNode(imageNamed: "good")
-        charNode.position = CGPoint(x: 0, y: -characterSize - 10) // putting character node below the whack hole. Y is character's height - 10.
+        charNode.position = CGPoint(x: 0, y: -characterSize - 15) // putting character node below the whack hole. Y is character's height - 10.
         charNode.size = CGSize(width: characterSize, height: characterSize)
         charNode.name = "character"
         
