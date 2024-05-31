@@ -18,6 +18,7 @@ class GameScene: SKScene {
     }
     var numRounds = 0
     var gameOver: SKSpriteNode!
+    var title: SKSpriteNode!
     
     override func didMove(to view: SKView) {
         let background = SKSpriteNode(imageNamed: "whackBackground")
@@ -32,6 +33,10 @@ class GameScene: SKScene {
         gameScore.horizontalAlignmentMode = .left
         gameScore.fontSize = 48
         addChild(gameScore)
+        
+        title = SKSpriteNode(imageNamed: "title")
+        title.position = CGPoint(x: 590, y: 722)
+        addChild(title)
         
         for i in 0..<5 {
             createSlot(at: CGPoint(x: 100 + (i * 245), y: 410))
@@ -94,19 +99,7 @@ class GameScene: SKScene {
         numRounds += 1
         
         if numRounds >= 30 {
-            for slot in slots {
-                slot.hide()
-            }
-            
-            gameOver = SKSpriteNode(imageNamed: "gameOver")
-            gameOver.position = CGPoint(x: 590, y: 410)
-            gameOver.zPosition = 1
-            addChild(gameOver)
-            run(SKAction.playSoundFileNamed("gameOver.caf", waitForCompletion: false))
-            
-            gameScore.run(SKAction.move(to: CGPoint(x: 450, y: 310), duration: 0.15))
-            gameScore.zPosition = 1
-            
+            displayGameOver()
             return
         }
         popupTime *= 0.991
@@ -130,6 +123,7 @@ class GameScene: SKScene {
     }
     
     func restartGame() {
+        title.isHidden = false
         gameScore.run(SKAction.move(to: CGPoint(x: 8, y: 8), duration: 0.15))
         gameOver.removeFromParent()
         numRounds = 0
@@ -139,5 +133,21 @@ class GameScene: SKScene {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
             self?.createEnemy()
         }
+    }
+    
+    func displayGameOver() {
+        for slot in slots {
+            slot.hide()
+        }
+        
+        title.isHidden = true
+        gameOver = SKSpriteNode(imageNamed: "gameOver")
+        gameOver.position = CGPoint(x: 590, y: 410)
+        gameOver.zPosition = 1
+        addChild(gameOver)
+        run(SKAction.playSoundFileNamed("gameOver.caf", waitForCompletion: false))
+        
+        gameScore.run(SKAction.move(to: CGPoint(x: 450, y: 310), duration: 0.15))
+        gameScore.zPosition = 1
     }
 }
